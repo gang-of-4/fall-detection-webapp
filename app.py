@@ -1,8 +1,10 @@
 from flask import Flask, Response, render_template, request
 import queue
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 class MessageAnnouncer:
     def __init__(self):
