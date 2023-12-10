@@ -34,15 +34,18 @@ announcer = MessageAnnouncer()
 def hello_world():
     return render_template('index.html')
 
-@app.route('/ping')
+
+@app.route('/ping', methods=['POST'])
 def ping():
-    msg = format_sse(data={
-        'name': request.args.get('name', 'Alaa'),
-        'age': request.args.get('age', 22),
-        'gender': request.args.get('gender', 'male')
-    })
+    # Assuming the data is sent as JSON in the request body
+    data = request.get_json()
+
+    name = data.get('name', 'Unknown')
+    age = data.get('age', 'Unknown')
+    gender = data.get('gender', 'unknown')
+
+    msg = format_sse(data={'name': name, 'age': age, 'gender': gender})
     announcer.announce(msg=msg)
-    return {}, 200
 
 @app.route('/listen', methods=['GET'])
 def listen():
