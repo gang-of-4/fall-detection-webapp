@@ -101,6 +101,9 @@
 
    <script>
     function renderCard(data) {
+        if (document.getElementById("cards").hasChildNodes()) {
+            return;
+        }
         const card = document.createElement("div");
         card.classList.add("bg-gray-200", "w-full", "flex", "px-4", "items-center", "rounded-lg", "py-3");
 
