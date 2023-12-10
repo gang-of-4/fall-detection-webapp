@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template, request
+from flask import Flask, Response, render_template, request, jsonify
 import queue
 import json
 from flask_cors import CORS
@@ -46,6 +46,7 @@ def ping():
 
     msg = format_sse(data={'name': name, 'age': age, 'gender': gender})
     announcer.announce(msg=msg)
+    return jsonify({}), 200
 
 @app.route('/listen', methods=['GET'])
 def listen():
